@@ -261,7 +261,7 @@ static int print_advertising_devices(int dd, uint8_t filter_type)
 		char addr[18];
 		
 			counter ++;
-			printf("counter : %d \n",counter);
+		//	printf("counter : %d \n",counter);
 		while ((len = read(dd, buf, sizeof(buf))) < 0) {
 			if (errno == EINTR && signal_received == SIGINT) {
 				len = 0;
@@ -298,7 +298,7 @@ static int print_advertising_devices(int dd, uint8_t filter_type)
 		}
 
 		counter_cmp ++;
-		printf("counter compare: %d \n",counter_cmp);
+		printf("the %d devices \n",counter_cmp);
 		
 	} while(FALSE);
 	
@@ -1178,17 +1178,17 @@ static struct {
 } commands[] = {
 	{ "help",		cmd_help,	"",
 		"Show this help"},
-	{ "lescan",		NULL,	"",
+	{ "lescan [ -s ]",		NULL,	"",
 		"scan LE device using with root" },
-	{ "quit",		cmd_exit,	"",
-		"Exit interactive mode" },
+//	{ "quit",		cmd_exit,	"",
+//		"Exit interactive mode" },
 //	{ "lescan" ,    cmd_lescan, "",
 //		"Scan LE devices "	},
-	{ "conn",		cmd_connect,	"[address [address type]]",
+	{ "conn [ -c ]",		cmd_connect,	"[address [address type]]",
 		"Connect to a remote device" },
-	{ "disc",		cmd_disconnect,	"",
-		"Disconnect from a remote device" },
-	{ "wr",			cmd_char_write,	"<handle> <new value>",
+//	{ "disc",		cmd_disconnect,	"",
+//		"Disconnect from a remote device" },
+	{ "wr [ -w ]",			cmd_char_write,	"<handle> <new value>",
 		"Characteristic Value Write (No response)" },
 	{ NULL, NULL, NULL}
 };
@@ -1292,7 +1292,7 @@ int main(int argc, char *argv[])
 	g_io_channel_set_close_on_unref(pchan, TRUE);
 	events = G_IO_IN | G_IO_ERR | G_IO_HUP | G_IO_NVAL;
 //	g_io_add_watch(pchan, events, prompt_read, NULL);
-
+	printf("enter following command : '-h' for more information \n");
 	int c;
 	int i = 0;
            int digit_optind = 0;
@@ -1362,7 +1362,7 @@ int main(int argc, char *argv[])
 	g_free(opt_src);
 	g_free(opt_dst);
 	g_free(opt_sec_level);
-	printf("check end \n");
+//	printf("check end \n");
  
 	exit(EXIT_SUCCESS);
 	//return EXIT_SUCCESS;
